@@ -1,0 +1,26 @@
+
+<div class="mat-elevation-z8">
+    <h1>Mis boletas</h1>
+    <table mat-table [dataSource]="boletasEmitidas">
+        <ng-container matColumnDef="receptorNombre">
+            <th mat-header-cell *matHeaderCellDef> Nombre de receptor </th>
+            <td mat-cell *matCellDef="let boleta"> {{boleta.receptorNombre}} </td>
+          </ng-container>
+          <ng-container matColumnDef="monto">
+            <th mat-header-cell *matHeaderCellDef> Monto </th>
+            <td mat-cell *matCellDef="let boleta"> {{boleta.monto}} </td>
+          </ng-container>
+          <ng-container matColumnDef="fechaEmision">
+            <th mat-header-cell *matHeaderCellDef> Fecha de emisión </th>
+            <td mat-cell *matCellDef="let boleta"> {{boleta.fechaEmision}} </td>
+          </ng-container>
+          <ng-container matColumnDef="cobrado">
+            <th mat-header-cell *matHeaderCellDef> Cobrado </th>
+            <td mat-cell *matCellDef="let boleta"> {{boleta.cobrado == null?"NO":boleta.cobrado}} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"(click)="getRecord(row)"></tr>
+    </table> 
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> 
+    <a  href="./boletas/new" >Agregar nueva</a>
+</div>

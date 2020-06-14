@@ -1,0 +1,36 @@
+<section class="singup-form">
+    <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <mat-form-field color="warn">
+            <input 
+                type="email" 
+                matInput placeholder="Email"  
+                ngModel 
+                name="emailInput" 
+                email
+                required
+                #emailInput="ngModel">
+                <mat-error *ngIf="!emailInput.hasError('required')">El email es inválido</mat-error>
+                <mat-error *ngIf="emailInput.hasError('required')">No puede ser nulo</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input 
+                type="password" 
+                matInput 
+                placeholder="Contraseña" 
+                ngModel 
+                name="password"
+                required
+                minlength="6"
+                >
+                <mat-hint>Debe ser al menos 6 caracteres</mat-hint>
+                
+        </mat-form-field>
+        <button type="submit"
+            mat-raised-button
+            [disabled]="f.invalid"
+            color="primary">
+                Crear cuenta
+        </button>
+        
+    </form>
+</section>

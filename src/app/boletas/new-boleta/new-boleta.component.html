@@ -1,0 +1,31 @@
+<section class="new-boleta" fxLayout fxLayoutAlign="center">
+    <mat-card fxFlex.xs="100%" fxFlex="400px" fxLayout="Column" fxLayoutGap="25px" >
+        <form #f="ngForm"  (ngSubmit)="onSubmit(f)">
+        <mat-card-title>Cargar nueva boleta</mat-card-title>
+        <mat-card-content fxLayout="Column">
+            <mat-form-field>
+                <input name="receptorNombre" matInput required ngModel #receptorNombre="ngModel" placeholder="Nombre del receptor">
+            </mat-form-field>
+            <mat-form-field>
+                <input name="receptorCuit" matInput pattern="[0-9]*" ngModel  #receptorCuit="ngModel" placeholder="CUIT del receptor">
+            </mat-form-field>
+            <mat-form-field>
+                <input name="monto" matInput  #monto="ngModel" pattern="[0-9]*" ngModel placeholder="Total $">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput required ngModel #fechaEmision="ngModel" name="fechaEmision" [matDatepicker]="fechaEmisionPicker" placeholder="Fecha de emisión">
+                <mat-datepicker-toggle matSuffix [for]="fechaEmisionPicker"></mat-datepicker-toggle>
+                <mat-datepicker #fechaEmisionPicker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput ngModel #fechaPago="ngModel" name="fechaPago" [matDatepicker]="fechaPagadoPicker" placeholder="Fecha de cobro">
+                <mat-datepicker-toggle matSuffix [for]="fechaPagadoPicker"></mat-datepicker-toggle>
+                <mat-datepicker #fechaPagadoPicker></mat-datepicker>
+            </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions fxLayoutAlign="end end">
+            <button mat-raised-button type="submit" [disabled]="f.invalid">Crear</button>
+        </mat-card-actions>
+    </form>
+    </mat-card>    
+</section>
