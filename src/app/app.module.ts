@@ -15,6 +15,9 @@ import { VerBoletaComponent } from './boletas/ver-boleta/ver-boleta.component';
 import { HomeComponent } from './home/home.component';
 import { AuthService } from './auth/auth.service';
 import { BoletasService } from './boletas/boletas.service';
+import {AngularFireModule} from '@angular/fire';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {environment} from '../environments/environment'
 
 @NgModule({
   declarations: [
@@ -32,7 +35,9 @@ import { BoletasService } from './boletas/boletas.service';
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule,
-    FormsModule
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
   ],
   providers: [AuthService,BoletasService],
   bootstrap: [AppComponent]

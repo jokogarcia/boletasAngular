@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "boletas-835d2": {
+      "hosting": {
+        "boletasAngular": [
+          "boletas-835d2"
+        ]
+      }
+    }
+  }
+}
