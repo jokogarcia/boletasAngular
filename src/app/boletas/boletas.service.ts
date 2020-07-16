@@ -1,8 +1,16 @@
 import { Boleta } from './boleta.model';
 import { Injectable } from '@angular/core';
+import {AngularFirestore} from '@angular/fire/firestore'
+import {Subject} from 'rxjs/Subject'
+import {map} from 'rxjs/operators'
+import { Observable } from 'rxjs/Observable';
+import {Subscription} from 'rxjs'
 
 @Injectable()
 export class BoletasService{
+    private fbSubs:Subscription[]= [];
+    constructor(private db:AngularFirestore){}
+    boletasChanged = new Subject<Boleta[]>();
     get(id: string): Boleta {
       var filtered= this.boletasEmitidas.filter(boleta=>boleta.id=id);
       if(filtered.length>0){
@@ -11,15 +19,31 @@ export class BoletasService{
       return null;
 
     }
-    boletasEmitidas:Boleta[] = [
-        {id:"1",receptorNombre:"Homero Simpson", receptorCuit:"302211562137",monto:250,fechaEmision:new Date(),cobrado:new Date()},
-        {id:"2",receptorNombre:"Carlos Calvo", receptorCuit:"302211562137",monto:333,fechaEmision:new Date(),cobrado:new Date()},
-        {id:"3",receptorNombre:"Cosme Fulanito", receptorCuit:"3022115651437",monto:250,fechaEmision:new Date()},
-    ];
+    /**get_the_posts(){
+    this.Post_collection = this.afs.collection('posts'); 
+    return this.Posts = this.Post_collection.valueChanges({ idField: 'id' }); 
+} */
+    fetchBoletasEmitidas(){
+        this.fbSubs.push(this.db.collection('misBoletas')
+        .valueChanges({idField:'id'})
+        .subscribe((boletas:Boleta[])=>{
+            this.boletasEmitidas = boletas;
+            this.boletasChanged.next([...this.boletasEmitidas]);
+        }, error=>{
+            console.log(error);
+        }));
+    }
+    boletasEmitidas:Boleta[];
     public addBoleta(boleta:Boleta){
-        this.boletasEmitidas.push(boleta);
+        this.db.collection('misBoletas').add(boleta);
+        
     }
     public removeBoleta(id:string){
-        this.boletasEmitidas = this.boletasEmitidas.filter(item=>item.id != id);
+        this.db.doc("misBoletas/"+id).delete();
+        
+    }
+    public cancelSubscriptions(){
+        this.fbSubs.forEach(sub=>sub.unsubscribe());
     }
 }
+    

@@ -16,9 +16,13 @@ export class AppComponent implements OnInit,OnDestroy {
     this.authSubscription.unsubscribe();
   }
   ngOnInit(){
-  this.authSubscription = this.authService.authChange.subscribe(authStatus=>{
-    this.isAuth=authStatus;
-  });
+    this.authSubscription = this.authService.authChange.subscribe(authStatus=>{
+      this.isAuth=authStatus;
+    });
+    this.authService.initAuthListener();
+  }
+  logout(){
+    this.authService.logout();
   }
   
   

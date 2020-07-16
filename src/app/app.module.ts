@@ -17,7 +17,8 @@ import { AuthService } from './auth/auth.service';
 import { BoletasService } from './boletas/boletas.service';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
-import {environment} from '../environments/environment'
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import {environment} from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {environment} from '../environments/environment'
     FlexLayoutModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    AngularFireAuthModule
   ],
   providers: [AuthService,BoletasService],
   bootstrap: [AppComponent]

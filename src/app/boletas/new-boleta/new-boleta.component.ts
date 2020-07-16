@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BoletasService } from '../boletas.service';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AngularFirestore } from '@angular/fire/firestore'
 
 @Component({
   selector: 'app-new-boleta',
@@ -10,9 +11,11 @@ import { Router } from '@angular/router';
 })
 export class NewBoletaComponent implements OnInit {
 
-  constructor(private boletasService:BoletasService, private router:Router) { }
+  constructor(private boletasService:BoletasService, private router:Router, private db:AngularFirestore) { }
 
   ngOnInit(): void {
+    this.db.collection('misBoletas').valueChanges()
+    .subscribe(result=>console.log(result));
   }
   onSubmit(form:NgForm){
     var id = Math.round(Math.random()*10000).toString();

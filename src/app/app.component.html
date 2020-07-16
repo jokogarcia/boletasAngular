@@ -20,7 +20,7 @@
                     <li  *ngIf="!isAuth" ><a  routerLink="/signup">Registración</a></li>
                     <li  *ngIf="!isAuth" ><a routerLink="/login">Iniciar sesion</a></li>
                     <li  *ngIf="isAuth" ><a routerLink="/boletas">Boletas</a></li>
-                    <li  *ngIf="isAuth" ><a>Salir</a></li>
+                    <li  *ngIf="isAuth" (click)="logout()"><a>Salir</a></li>
                 </ul>
                 
                 

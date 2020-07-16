@@ -1,3 +1,5 @@
+
+
 export interface Boleta{
     id:string;
     receptorNombre:string;

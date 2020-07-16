@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit(form:NgForm){
     this.authService.login({
-      email:form.value.email,
+      email:form.value.emailInput,
       password:form.value.password
     });
   }
