@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
+import { UIService } from '../shared/ui.service';
 
 @Component({
   selector: 'app-boletas',
@@ -14,16 +15,25 @@ import {Observable, Subscription} from 'rxjs';
 export class BoletasComponent implements OnInit, OnDestroy {
   boletasEmitidas:MatTableDataSource<Boleta>;
   boletasSubscription:Subscription;
+  uiSubscription:Subscription;
+  isBusy=false;
   displayedColumns: string[] = ['receptorNombre', 'monto', 'fechaEmision', 'cobrado'];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  constructor(private boletasService:BoletasService,private router:Router) { }
+  constructor(
+    private boletasService:BoletasService,
+    private router:Router,
+    private uiService:UIService
+    ) { }
   ngOnDestroy(): void {
     this.boletasSubscription.unsubscribe();
+    this.uiSubscription.unsubscribe();
   }
 
 
   ngOnInit(): void {
+    this.uiSubscription = this.uiService.loadingSateChanged.subscribe(isLoading=>this.isBusy=isLoading);
+
     this.boletasService.fetchBoletasEmitidas();
     this.boletasSubscription=this.boletasService.boletasChanged
       .subscribe(boletas=> this.boletasEmitidas.data = boletas);

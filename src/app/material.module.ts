@@ -12,10 +12,43 @@ import { MatDatepickerModule} from '@angular/material/datepicker'
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar'
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 
 @NgModule({
-    imports:[MatButtonModule,MatIconModule,MatFormFieldModule,MatInputModule,MatSidenavModule,MatToolbarModule,MatListModule,MatCardModule,MatSelectModule,MatDatepickerModule,MatNativeDateModule,MatTableModule,MatPaginatorModule],
-    exports:[MatButtonModule,MatIconModule,MatFormFieldModule,MatInputModule,MatSidenavModule,MatToolbarModule,MatListModule,MatCardModule,MatSelectModule,MatDatepickerModule,MatNativeDateModule,MatTableModule,MatPaginatorModule]
+    imports:[
+        MatButtonModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSidenavModule,
+        MatToolbarModule,
+        MatListModule,
+        MatCardModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSnackBarModule,
+        MatProgressSpinnerModule
+    ],
+    exports:[
+        MatButtonModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSidenavModule,
+        MatToolbarModule,
+        MatListModule,
+        MatCardModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatTableModule,
+        MatPaginatorModule, 
+        MatSnackBarModule,
+        MatProgressSpinnerModule
+    ]
 })
 export class MaterialModule{}
