@@ -1,10 +1,10 @@
 <mat-sidenav-container>
     <mat-sidenav #sidenav role="navigation">
         <mat-nav-list>
-            <a mat-list-item routerLink="/signup" *ngIf="!isAuth" (click)="sidenav.close()"><mat-icon>person_add</mat-icon><span class="nav-caption">Registración</span></a>
-            <a mat-list-item routerLink="/login"  *ngIf="!isAuth"  (click)="sidenav.close()"><mat-icon>person</mat-icon><span class="nav-caption">Iniciar sesion</span></a>
-            <a mat-list-item routerLink="/boletas"  *ngIf="isAuth"  (click)="sidenav.close()"><mat-icon>article</mat-icon><span class="nav-caption">Boletas</span></a>
-            <mat-list-item  *ngIf="isAuth" >
+            <a mat-list-item routerLink="/signup" *ngIf="!(isAuth$ | async)" (click)="sidenav.close()"><mat-icon>person_add</mat-icon><span class="nav-caption">Registración</span></a>
+            <a mat-list-item routerLink="/login"  *ngIf="!(isAuth$ | async)"  (click)="sidenav.close()"><mat-icon>person</mat-icon><span class="nav-caption">Iniciar sesion</span></a>
+            <a mat-list-item routerLink="/boletas"  *ngIf="(isAuth$ | async)"  (click)="sidenav.close()"><mat-icon>article</mat-icon><span class="nav-caption">Boletas</span></a>
+            <mat-list-item  *ngIf="(isAuth$ | async)" >
                 <button mat-icon-button  (click)="sidenav.close()"><mat-icon>directions_run</mat-icon><span class="nav-caption">Salir</span></button>
             </mat-list-item>
         </mat-nav-list>
@@ -17,10 +17,10 @@
             <div><a routerLink="/">LOGO</a></div>
             <div fxFlex fxLayout fxLayoutAlign="flex-end" fx>
                 <ul fxLayout fxLayoutGap="10px" class="navigation-items" fxHide.xs>
-                    <li  *ngIf="!isAuth" ><a  routerLink="/signup">Registración</a></li>
-                    <li  *ngIf="!isAuth" ><a routerLink="/login">Iniciar sesion</a></li>
-                    <li  *ngIf="isAuth" ><a routerLink="/boletas">Boletas</a></li>
-                    <li  *ngIf="isAuth" (click)="logout()"><a>Salir</a></li>
+                    <li  *ngIf="!(isAuth$ | async)" ><a  routerLink="/signup">Registración</a></li>
+                    <li  *ngIf="!(isAuth$ | async)" ><a routerLink="/login">Iniciar sesion</a></li>
+                    <li  *ngIf="(isAuth$ | async)" ><a routerLink="/boletas">Boletas</a></li>
+                    <li  *ngIf="(isAuth$ | async)" (click)="logout()"><a>Salir</a></li>
                 </ul>
                 
                 

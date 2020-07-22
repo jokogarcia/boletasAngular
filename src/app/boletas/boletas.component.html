@@ -1,7 +1,7 @@
 
 <div class="mat-elevation-z8">
     <h1>Mis boletas</h1>
-    <table *ngIf="!isBusy" mat-table [dataSource]="boletasEmitidas">
+    <table *ngIf="!(isLoading$ | async)" mat-table [dataSource]="boletasEmitidas">
         <ng-container matColumnDef="receptorNombre">
             <th mat-header-cell *matHeaderCellDef> Nombre de receptor </th>
             <td mat-cell *matCellDef="let boleta"> {{boleta.receptorNombre}} </td>
@@ -21,7 +21,7 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"(click)="getRecord(row)"></tr>
     </table>
-    <mat-spinner *ngIf="isBusy"></mat-spinner>
+    <mat-spinner *ngIf="(isLoading$ | async)"></mat-spinner>
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> 
     <button (click)='addNew()' >Agregar nueva</button>
 </div>
