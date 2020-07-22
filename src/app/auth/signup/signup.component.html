@@ -27,12 +27,12 @@
         </mat-form-field>
         <button type="submit"
             mat-raised-button
-            *ngIf="!isLoading"
+            *ngIf="!(isLoading$ | async)"
             [disabled]="f.invalid"
             color="primary">
                 Crear cuenta
         </button>
-        <mat-spinner *ngIf="isLoading"></mat-spinner>
+        <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
         
     </form>
 </section>
